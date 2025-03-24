@@ -26,7 +26,7 @@ SECRET_KEY = 'f)#ukwb4(cs#dd=b0^12t02zz9#fp4^w#a9uop4gwq$1$x*jdq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['restaurent-env.eba-cmdbmzp8.eu-west-1.elasticbeanstalk.com','127.0.0.1']
+ALLOWED_HOSTS = ['restaurent-env.eba-cmdbmzp8.eu-west-1.elasticbeanstalk.com','127.0.0.1','*']
 
 
 # Application definition
