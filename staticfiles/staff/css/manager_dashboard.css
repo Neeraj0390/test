@@ -1,0 +1,108 @@
+.manager-dashboard {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 1000px;
+    margin: 2rem auto;
+}
+
+h2
+{
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;  /* Centers text horizontally */
+}
+
+
+h3 {
+    color: #555;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.request-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.request-box {
+    width: 200px;
+    padding: 1rem;
+    border-radius: 5px;
+    background: #fff3cd; /* Yellow for Pending */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.request-box:hover {
+    transform: translateY(-2px);
+}
+
+.request-box.pending {
+    background: #fff3cd; /* Yellow */
+}
+
+.request-box.approved {
+    background: #d4edda; /* Green */
+}
+
+.request-box.rejected {
+    background: #f8d7da; /* Red */
+}
+
+.request-box strong {
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.request-box span {
+    font-size: 0.9rem;
+}
+
+.urgency-high {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.urgency-medium {
+    color: #ffc107;
+}
+
+.urgency-low {
+    color: #28a745;
+}
+
+.review-btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #74ebd5; /* Teal to match theme */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.review-btn:hover {
+    background: #808080; /* Grey on hover */
+    color: white;
+    text-decoration: none;
+}
+.delete-btn {
+    padding: 0.5rem 1rem;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    justify-content: center;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}

@@ -1,0 +1,36 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+{% block title %}Manager Dashboard{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'staff/css/manager_dashboard.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="manager-dashboard">
+        <h2>Manager Dashboard</h2>
+        <form method="POST" action="{% url 'staff:delete_reviewed_items' %}" class="delete-form">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn">Delete Reviewed Items</button>
+        </form>
+        <h3>All Requests</h3>
+        <div class="request-container">
+            {% for request in requests %}
+                <div class="request-box {{ request.status|lower }}">
+                    <strong>{{ request.item_name }}</strong> (Qty: {{ request.quantity }})<br>
+                    Urgency: <span class="urgency-{{ request.urgency|lower }}">{{ request.urgency }}</span><br>
+                    Category: {{ request.category }}<br>
+                    Dept: {{ request.department_section }}<br>
+                    Reason: {{ request.reason }}<br>
+                    By: {{ request.requested_by }}<br>
+                    Requested: {{ request.requested_at|date:"M d, Y H:i" }}
+                    Status: {{ request.status }}<br>
+                    {% if request.status == 'Pending' %}
+                        <br><a href="{% url 'staff:update_request_status' request.id %}" class="review-btn">Review</a>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>No requests yet.</p>
+            {% endfor %}
+        </div>
+        <a href="{% url 'staff:logout' %}">Logout</a>
+    </div>
+{% endblock %}

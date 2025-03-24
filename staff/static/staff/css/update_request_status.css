@@ -1,0 +1,84 @@
+.manager-dashboard {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 700px;
+    margin: 2rem auto;
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+p {
+    color: #555;
+    margin: 0.5rem 0;
+}
+
+p strong {
+    color: #333;
+}
+
+.urgency-high {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.urgency-medium {
+    color: #ffc107;
+}
+
+.urgency-low {
+    color: #28a745;
+}
+
+.update-request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+}
+
+.status-select {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: white;
+}
+
+.status-select:focus {
+    border-color: #74ebd5;
+    outline: none;
+}
+
+.status-select option.approve-option {
+    color: #dc3545; /* Red for Approve */
+}
+
+.status-select option.reject-option {
+    color: #28a745; /* Green for Reject */
+}
+
+.btn {
+    padding: 0.8rem;
+    background: #74ebd5; /* Teal */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #acb6e5; /* Lighter teal on hover */
+}

@@ -1,0 +1,37 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+{% block title %}Staff Dashboard{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'staff/css/staff_dashboard.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="staff-dashboard">
+        <h2>Welcome, {{ user.username }}!</h2>
+        <div class="button-group">
+            <button onclick="window.location.href='{% url 'staff:itemrequest' %}'" class="request-btn">Add Request</button>
+            <form method="POST" action="{% url 'staff:delete_staff_reviewed_items' %}" class="delete-form">
+                {% csrf_token %}
+                <button type="submit" class="delete-btn">Delete Reviewed Items</button>
+            </form>
+        </div>
+        <h3>Your Requests</h3>
+        {% if items %}
+            <ul class="request-list">
+                {% for item in items %}
+                    <li class="request-item {{ item.status|lower }}">
+                        <strong>{{ item.item_name }}</strong> (Qty: {{ item.quantity }})<br>
+                        Status: <span class="status">{{ item.status }}</span><br>
+                        Urgency: <span class="urgency-{{ item.urgency|lower }}">{{ item.urgency }}</span> |
+                        Category: {{ item.category }} |
+                        Dept: {{ item.department_section }} |
+                        Reason: {{ item.reason }}<br>
+                        Requested: {{ item.requested_at|date:"M d, Y H:i" }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-requests">No requests yet.</p>
+        {% endif %}
+        <a href="{% url 'staff:logout' %}">Logout</a>
+    </div>
+{% endblock %}

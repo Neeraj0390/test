@@ -1,0 +1,23 @@
+/* Shared styles for all pages */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+a {
+    color: #74ebd5;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #acb6e5;
+    text-decoration: underline;
+}

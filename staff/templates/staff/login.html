@@ -1,0 +1,21 @@
+{% extends 'staff/base.html' %}
+{% load static %}  <!-- Add this -->
+{% block title %}Login{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'staff/css/login.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="login-container">
+        <h2>Staff Login</h2>
+        <form method="POST" action="{% url 'staff:login' %}">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+{% block title %}Update Request{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'staff/css/update_request_status.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="manager-dashboard">
+        <h2>Update Request: {{ item.item_name }}</h2>
+        <p><strong>Qty:</strong> {{ item.quantity }} | <strong>Urgency:</strong> <span class="urgency-{{ item.urgency|lower }}">{{ item.urgency }}</span></p>
+        <p><strong>Category:</strong> {{ item.category }} | <strong>Dept:</strong> {{ item.department_section }}</p>
+        <p><strong>Reason:</strong> {{ item.reason }}</p>
+        <p><strong>Requested by:</strong> {{ item.requested_by }} on {{ item.requested_at|date:"M d, Y H:i" }}</p>
+        <form method="POST" class="update-request-form">
+            {% csrf_token %}
+            <label for="status">Status:</label>
+            <select name="status" id="status" class="status-select">
+                <option value="" selected disabled>Select an option</option>
+                <option value="Approved" class="approve-option">Approve</option>
+                <option value="Rejected" class="reject-option">Reject</option>
+            </select>
+            <button type="submit" class="btn">Update Status</button>
+        </form>
+        <a href="{% url 'staff:manager_dashboard' %}">Back to Dashboard</a>
+    </div>
+{% endblock %}

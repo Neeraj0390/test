@@ -1,0 +1,22 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+{% block title %}Request Item{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'staff/css/request_item.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="staff-dashboard">
+        <h2>Request a New Item</h2>
+        <form method="POST" action="{% url 'staff:itemrequest' %}">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button type="submit">Submit Request</button>
+        </form>
+        <a href="{% url 'staff:staff_dashboard' %}">Back to Dashboard</a>
+    </div>
+{% endblock %}

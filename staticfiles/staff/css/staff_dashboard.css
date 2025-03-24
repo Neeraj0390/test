@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.staff-dashboard {
+    max-width: 900px;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+}
+
+h2 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+h3 {
+    color: #555;
+    font-size: 1.4rem;
+    margin: 1.5rem 0 1rem;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.request-list {
+    list-style: none;
+    padding: 0;
+}
+
+.request-item {
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    background: #fff3cd; /* Yellow for Pending */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.request-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.request-item.pending {
+    background: #fff3cd;
+    border-left: 6px solid #ffc107;
+}
+
+.request-item.approved {
+    background: #d4edda;
+    border-left: 6px solid #28a745;
+}
+
+.request-item.rejected {
+    background: #f8d7da;
+    border-left: 6px solid #dc3545;
+}
+
+.request-item strong {
+    color: #333;
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.request-item .status {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.urgency-high {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.urgency-medium {
+    color: #ffc107;
+}
+
+.urgency-low {
+    color: #28a745;
+}
+
+.request-btn {
+    padding: 0.8rem 1.5rem;
+    background: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s, transform 0.2s;
+}
+
+.request-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.delete-form {
+    display: inline-block;
+}
+
+.delete-btn {
+    padding: 0.8rem 1.5rem;
+    background: #dc3545; /* Red */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s, transform 0.2s;
+}
+
+.delete-btn:hover {
+    background: #c82333; /* Darker red */
+    transform: translateY(-2px);
+}
+
+.no-requests {
+    color: #757575;
+    font-style: italic;
+    text-align: center;
+    margin-top: 1rem;
+}
