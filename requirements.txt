@@ -1,2 +1,2 @@
-Django
+Django>=4.2,<5.0  # 4.2 is LTS, supports Python 3.11
 pytz==2025.1
