@@ -7,10 +7,10 @@ phases:
     commands:
       - echo "Installing dependencies..."
       - pip install --upgrade pip
-      - pip install -r $CODEBUILD_SRC_DIR/requirements.txt  # Explicit root path
+      - pip install -r $CODEBUILD_SRC_DIR/requirements.txt
 
       - echo "Verifying Java version..."
-      - java -version  # Ensures Java 11 is available
+      - java -version
 
       - echo "Downloading SonarScanner 5.0.1..."
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
@@ -24,35 +24,46 @@ phases:
       - mv dependency-check /opt/dependency-check
       - /opt/dependency-check/bin/dependency-check.sh --version
 
+      # Create NVD data directory and sync from S3
+      - echo "Syncing NVD data from S3..."
+      - mkdir -p /opt/nvd-cache
+      - aws s3 sync s3://devopsbucketneer/nvd-cache/ /opt/nvd-cache/
+
   pre_build:
     commands:
       - echo "Verifying Python version..."
       - python --version
       - echo "Running pylint..."
       - pylint $CODEBUILD_SRC_DIR/*.py > pylint-report-root.txt || echo "Pylint failed on root"
-      - pylint $CODEBUILD_SRC_DIR/restaurant_complaint_system/*.py > pylint-report-restaurant.txt || echo "Pylint failed on restaurant"
-      - pylint $CODEBUILD_SRC_DIR/complaints/*.py > pylint-report-complaints.txt || echo "Pylint failed on complaints"
+      - pylint $CODEBUILD_SRC_DIR/restaurent/*.py > pylint-report-restaurant.txt || echo "Pylint failed on restaurant"
+      - pylint $CODEBUILD_SRC_DIR/staff/*.py > pylint-report-complaints.txt || echo "Pylint failed on complaints"
       - cat pylint-report-root.txt pylint-report-restaurant.txt pylint-report-complaints.txt > pylint-report.txt
 
   build:
     commands:
       - echo "Running SonarCloud scan..."
       - /opt/sonar-scanner/bin/sonar-scanner -X -Dsonar.login=$SONAR_TOKEN
-      - echo "Contents of requirements.txt:"
-      - cat "$CODEBUILD_SRC_DIR/requirements.txt"  
-      - echo "Running OWASP Dependency-Check..."
-      - echo "Running OWASP Dependency-Check..."
-      - /opt/dependency-check/bin/dependency-check.sh --project "Django Project" --scan "$CODEBUILD_SRC_DIR/" --out ./dependency-check-report --data "$CODEBUILD_SRC_DIR/nvd-cache" --log dependency-check.log
-
       
-    commands:
+      - echo "Contents of requirements.txt:"
+      - cat "$CODEBUILD_SRC_DIR/requirements.txt"
+      
+      - echo "Running OWASP Dependency-Check..."
+      - /opt/dependency-check/bin/dependency-check.sh --project "Django Project" --scan "$CODEBUILD_SRC_DIR/" --out ./dependency-check-report --data "/opt/nvd-cache" --log dependency-check.log
+      
+      # Sync updated NVD data back to S3
+      - echo "Syncing updated NVD data back to S3..."
+      - aws s3 sync /opt/nvd-cache/ s3://devopsbucketneer/nvd-cache/
+
+    finally:
       - echo "Build, SonarCloud scan, and Dependency-Check completed"
 
 artifacts:
   files:
     - pylint-report.txt
     - dependency-check-report/*
+  name: my-build-artifacts
+  discard-paths: yes
 
 cache:
   paths:
-    - '$CODEBUILD_SRC_DIR/nvd-cache/**/*'  # Cache the NVD data directory
+    - '/opt/nvd-cache/**/*'  # Local cache path
