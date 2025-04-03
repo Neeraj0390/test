@@ -9,11 +9,15 @@ phases:
       - mv dependency-check /opt/dependency-check
       - /opt/dependency-check/bin/dependency-check.sh --version
 
-  build:  # ✅ Replaced 'owaspstage' with 'build' (a valid phase) casual
+  build:
     commands:
       - echo "Checking NVD cache directory..."
       - mkdir -p /opt/nvd-cache  # Ensure cache directory exists
       - ls -lah /opt/nvd-cache  # Verify if cache is restored
+
+      # ✅ Set proper permissions for cache directory
+      - echo "Setting permissions for NVD cache..."
+      - chmod -R 777 /opt/nvd-cache  
 
       - echo "Running OWASP Dependency-Check..."
       - /opt/dependency-check/bin/dependency-check.sh --project "Django Project" --scan "$CODEBUILD_SRC_DIR/" --out ./dependency-check-report --data "/opt/nvd-cache" --log dependency-check.log
@@ -27,4 +31,4 @@ artifacts:
 
 cache:
   paths:
-    - '/opt/nvd-cache/**/*'  # Cache the NVD data directory across builds
+    - '/opt/nvd-cache/'  # Cache the NVD data directory across builds
