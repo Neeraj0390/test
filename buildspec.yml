@@ -9,7 +9,7 @@ phases:
       - mv dependency-check /opt/dependency-check
       - /opt/dependency-check/bin/dependency-check.sh --version
 
-  build:  # ✅ Replaced 'owaspstage' with 'build' (a valid phase)
+  build:  # ✅ Replaced 'owaspstage' with 'build' (a valid phase) casual
     commands:
       - echo "Checking NVD cache directory..."
       - mkdir -p /opt/nvd-cache  # Ensure cache directory exists
