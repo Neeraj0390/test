@@ -1,12 +1,18 @@
 [MASTER]
-# Specify a configuration file.
-# pylint config file
-# pylint is case sensitive
-# ignore= migrations
+load-plugins=pylint_django
+fail-under=8.0
+django-settings-module=restaurent.settings
+
 
 [MESSAGES CONTROL]
 # Disable messages you don’t want to see
-disable=missing-docstring, C0114, C0115, C0116, line-too-long, trailing-whitespace, missing-final-newline, wrong-import-order, invalid-name
+disable=missing-docstring,
+C0114, C0115, C0116,
+line-too-long,
+trailing-whitespace,
+missing-final-newline,
+wrong-import-order,
+invalid-name
 
 [FORMAT]
 # Max line length (adjustable based on your team's preferences)
