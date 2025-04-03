@@ -6,13 +6,7 @@ django-settings-module=restaurent.settings
 
 [MESSAGES CONTROL]
 # Disable messages you don’t want to see
-disable=missing-docstring,
-C0114, C0115, C0116,
-line-too-long,
-trailing-whitespace,
-missing-final-newline,
-wrong-import-order,
-invalid-name
+disable=missing-docstring,C0114,C0115,C0116,line-too-long,trailing-whitespace,missing-final-newline,wrong-import-order,invalid-name
 
 [FORMAT]
 # Max line length (adjustable based on your team's preferences)
@@ -26,4 +20,3 @@ max-methods=20
 [IMPORTS]
 # Allow relative imports in Django applications
 known-third-party=django
-

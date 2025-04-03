@@ -31,12 +31,12 @@ phases:
       - echo "Running pylint..."
       - pylint $CODEBUILD_SRC_DIR/*.py > pylint-report-root.txt || echo "Pylint failed on root"
       - pylint $CODEBUILD_SRC_DIR/restaurent/*.py > pylint-report-restaurant.txt || echo "Pylint failed on restaurant"
-      - pylint $CODEBUILD_SRC_DIR/staff/*.py > pylint-report-complaints.txt || echo "Pylint failed on complaints"
-      - cat pylint-report-root.txt pylint-report-restaurant.txt pylint-report-complaints.txt > pylint-report.txt
+      - pylint $CODEBUILD_SRC_DIR/staff/*.py > pylint-staff.txt || echo "Pylint failed on complaints"
+      - cat pylint-report-root.txt pylint-report-restaurant.txt pylint-staff.txt > pylint-report.txt
 
       - echo "Running pytest..."
-      - pytest --maxfail=1 --disable-warnings -q > pytest-report.txt || echo "Pytest failed"
-      - cat pytest-report.txt >> pylint-report.txt  # Combine pytest report with pylint report
+      - pytest --maxfail=1 --disable-warnings > pytest-report.txt || echo "Pytest failed"
+      
 
   build:
     commands:
