@@ -31,7 +31,7 @@ phases:
       
       # Set Django settings module (adjust to your project)
       - echo "Setting up Django environment..."
-      - export DJANGO_SETTINGS_MODULE=myproject.settings  # Replace with your actual settings module
+      - export DJANGO_SETTINGS_MODULE=restaurent.settings  
       
       - echo "Running pylint..."
       - pylint $CODEBUILD_SRC_DIR/*.py > pylint-report-root.txt || echo "Pylint failed on root"
