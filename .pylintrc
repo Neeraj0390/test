@@ -1,0 +1,23 @@
+[MASTER]
+# Specify a configuration file.
+# pylint config file
+# pylint is case sensitive
+# ignore= migrations
+
+[MESSAGES CONTROL]
+# Disable messages you don’t want to see
+disable=missing-docstring, C0114, C0115, C0116, line-too-long, trailing-whitespace, missing-final-newline, wrong-import-order, invalid-name
+
+[FORMAT]
+# Max line length (adjustable based on your team's preferences)
+max-line-length=120
+
+[DESIGN]
+# Disable checks for too many methods in a class, or too many arguments
+max-args=10
+max-methods=20
+
+[IMPORTS]
+# Allow relative imports in Django applications
+known-third-party=django
+
