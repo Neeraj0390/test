@@ -34,23 +34,25 @@ phases:
       - pylint $CODEBUILD_SRC_DIR/staff/*.py > pylint-report-complaints.txt || echo "Pylint failed on complaints"
       - cat pylint-report-root.txt pylint-report-restaurant.txt pylint-report-complaints.txt > pylint-report.txt
 
+      - echo "Running pytest..."
+      - pytest --maxfail=1 --disable-warnings -q > pytest-report.txt || echo "Pytest failed"
+      - cat pytest-report.txt >> pylint-report.txt  # Combine pytest report with pylint report
+
   build:
     commands:
       - echo "Running SonarCloud scan..."
       - /opt/sonar-scanner/bin/sonar-scanner -X -Dsonar.login=$SONAR_TOKEN
       - echo "Contents of requirements.txt:"
-      - cat "$CODEBUILD_SRC_DIR/requirements.txt"  
-      - echo "Running OWASP Dependency-Check..."
+      - cat "$CODEBUILD_SRC_DIR/requirements.txt"
       - echo "Running OWASP Dependency-Check..."
       - /opt/dependency-check/bin/dependency-check.sh --project "Django Project" --scan "$CODEBUILD_SRC_DIR/" --out ./dependency-check-report --data "$CODEBUILD_SRC_DIR/nvd-cache" --log dependency-check.log
 
-      
-    commands:
       - echo "Build, SonarCloud scan, and Dependency-Check completed"
 
 artifacts:
   files:
     - pylint-report.txt
+    - pytest-report.txt
     - dependency-check-report/*
 
 cache:
